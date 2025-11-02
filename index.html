@@ -3,13 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Weather App</title>
+    <title>Advanced Responsive Weather App</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body class="weather-default"> <h1>Weather Finder</h1>
+<body class="weather-default"> 
     
-    <input type="text" id="cityInput" placeholder="Enter city name">
-    <button id="fetchButton">Get Weather</button>
+    <h1>Weather Finder</h1>
+    
+    <!-- NEW: Controls wrapper for responsive layout of input and buttons -->
+    <div class="controls">
+        <input type="text" id="cityInput" placeholder="Enter city name">
+        <button id="fetchButton">Get Weather</button>
+        <!-- The Unit Toggle button will be inserted here by script.js -->
+    </div>
     
     <div id="result"></div>
     
