@@ -35,13 +35,23 @@ body {
 
 /* Controls & Input Styling */
 h1 { color: #333; margin-bottom: 20px; text-align: center; }
-input[type="text"] { padding: 10px; width: 300px; max-width: 400px; border: 1px solid #ccc; border-radius: 4px; margin-bottom: 10px; font-size: 16px; box-sizing: border-box; display: block; margin-left: auto; margin-right: auto;} /* Center on desktop */
+input[type="text"] { 
+    padding: 10px; 
+    width: 300px; 
+    max-width: 400px; 
+    border: 1px solid #ccc; 
+    border-radius: 4px; 
+    margin-bottom: 10px; 
+    font-size: 16px; 
+    box-sizing: border-box;
+}
 
 /* Grouping input and buttons for better control on desktop */
 .controls {
     display: flex;
     gap: 10px;
     margin-bottom: 20px;
+    justify-content: center; /* Center the controls group on desktop */
 }
 
 /* Style for the fetch button (existing) */
@@ -73,11 +83,26 @@ button#fetchButton:hover { background-color: #45a049; }
 
 
 /* Current weather container */
-#result { margin-top: 20px; font-size: 18px; color: #555; width: 100%; display: flex; justify-content: center; flex-direction: column; align-items: center; }
+#result { 
+    margin-top: 20px; 
+    font-size: 18px; 
+    color: #555; 
+    width: 100%; 
+    display: flex; 
+    justify-content: center; 
+    flex-direction: column; 
+    align-items: center; 
+}
 .current-weather-content { width: 100%; max-width: 800px; }
 
 /* Current weather table styles (Desktop View) */
-.temp-table { width: 100%; border-collapse: collapse; box-shadow: 0 2px 8px rgba(0,0,0,0.1); background: #fff; margin-bottom: 20px; }
+.temp-table { 
+    width: 100%; 
+    border-collapse: collapse; 
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1); 
+    background: #fff; 
+    margin-bottom: 20px; 
+}
 .temp-table th, .temp-table td { border: 1px solid #ddd; padding: 12px; text-align: center; }
 .temp-table th { background-color: #007BFF; color: white; font-weight: bold; }
 .temp-table tr:nth-child(even) { background-color: #f9f9f9; }
@@ -86,7 +111,8 @@ button#fetchButton:hover { background-color: #45a049; }
 /* --- Advanced Metrics Grid (Desktop) --- */
 .metrics-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr); /* 4 equal columns on desktop/tablet */
+    /* This ensures 4 equal columns on desktop and tablet */
+    grid-template-columns: repeat(4, 1fr); 
     gap: 15px;
     margin-bottom: 30px;
     width: 100%;
@@ -123,7 +149,7 @@ footer { margin-top: 40px; padding: 20px; text-align: center; color: #555; width
     /* Center the controls better */
     input[type="text"], button { max-width: 300px; }
     
-    /* Keep 4 columns for metrics but let them breathe */
+    /* Metrics grid remains 4 columns wide on tablet */
     .metrics-grid {
         grid-template-columns: repeat(4, 1fr);
         gap: 10px;
@@ -136,7 +162,7 @@ footer { margin-top: 40px; padding: 20px; text-align: center; color: #555; width
     body { padding: 10px; }
     h1 { font-size: 1.6rem; }
 
-    /* Stack input and buttons vertically */
+    /* Stack controls vertically */
     .controls {
         flex-direction: column;
         width: 100%;
@@ -175,7 +201,7 @@ footer { margin-top: 40px; padding: 20px; text-align: center; color: #555; width
         text-align: right;
         font-size: 1rem;
     }
-    /* Manually add the labels for the 4 columns (Fahrenheit is gone, replaced by unit toggle) */
+    /* Manually add the labels for the 4 columns */
     .temp-table td:nth-of-type(1):before { content: "City"; }
     .temp-table td:nth-of-type(2):before { content: "Temp"; }
     .temp-table td:nth-of-type(3):before { content: "Feels Like"; }
