@@ -18,14 +18,12 @@ body {
 .weather-cloudy { background-color: #B0C4DE; }
 .weather-rainy { background-color: #778899; }
 
-/* Style for heading */
+/* Style for heading and controls */
 h1 {
     color: #333;
     margin-bottom: 20px;
     text-align: center;
 }
-
-/* Responsive style for input field */
 input[type="text"] {
     padding: 10px;
     width: 90%;
@@ -36,8 +34,6 @@ input[type="text"] {
     font-size: 16px;
     box-sizing: border-box;
 }
-
-/* Style for button */
 button {
     padding: 10px 20px;
     background-color: #4CAF50;
@@ -58,10 +54,10 @@ button:hover { background-color: #45a049; }
     width: 100%;
     display: flex;
     justify-content: center;
-    overflow-x: auto;
+    /* Removed overflow-x: auto; since we are stacking the table now */
 }
 
-/* Current weather table styles */
+/* Current weather table styles (Desktop View) */
 table {
     width: 100%;
     max-width: 700px;
@@ -82,7 +78,7 @@ th {
 }
 tr:nth-child(even) { background-color: #f9f9f9; }
 
-/* --- 5-DAY FORECAST STYLES --- */
+/* --- 5-DAY FORECAST STYLES (Retained) --- */
 #forecast-container {
     width: 100%;
     max-width: 800px;
@@ -93,29 +89,25 @@ tr:nth-child(even) { background-color: #f9f9f9; }
     color: #333;
     margin-top: 0;
 }
-
-/* New wrapper to handle card layout */
 .forecast-cards-wrapper {
     display: flex;
     flex-wrap: wrap; 
-    justify-content: center; /* Center cards within the max-width container */
+    justify-content: center;
     width: 100%;
 }
-
 .forecast-card {
     background: rgba(255, 255, 255, 0.9);
     border: 1px solid #ccc;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    margin: 8px; /* Slightly smaller margin for tight fit */
+    margin: 8px;
     padding: 15px;
     text-align: center;
-    width: 130px; /* Slightly wider card for better viewing */
+    width: 130px;
     box-sizing: border-box;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 .forecast-card:hover { transform: translateY(-3px); box-shadow: 0 4px 10px rgba(0,0,0,0.15); }
-
 .forecast-card h4 { margin: 0 0 10px 0; font-size: 1.1rem; }
 .forecast-card img { width: 50px; height: 50px; }
 .forecast-card .temp { font-size: 1.2rem; font-weight: bold; margin: 10px 0 5px 0; }
@@ -130,22 +122,69 @@ footer {
     width: 100%;
 }
 
-/* --- RESPONSIVE MEDIA QUERIES --- */
+/* --- RESPONSIVE MEDIA QUERIES (Mobile View) --- */
 @media (max-width: 600px) {
     body { padding: 10px; }
     h1 { font-size: 1.6rem; }
-    
-    /* Ensure input and button take up most of the screen width */
     input[type="text"], button { width: 100%; max-width: none; }
 
-    /* Adjust card width to fit 3-across comfortably on most phones */
+    /* * NEW: Responsive Table Stacking for Current Weather 
+     * This transforms the 1x4 table into 4 separate vertical data points.
+    */
+    #result table, #result thead, #result tbody, #result th, #result td, #result tr {
+        display: block; /* Turns table elements into blocks */
+    }
+
+    /* Hide table headers (they will be replaced by labels) */
+    #result thead tr {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+
+    #result tr {
+        border: 1px solid #ccc;
+        margin-bottom: 15px; /* Space between the "rows" */
+        background: #fff;
+        border-radius: 5px;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+
+    #result td {
+        /* Behave like a list item */
+        border: none;
+        border-bottom: 1px solid #eee;
+        position: relative;
+        padding-left: 50%; /* Make space for the label */
+        text-align: right;
+        font-size: 1rem;
+    }
+
+    /* Add the data labels (City, Temp, etc.) before the data */
+    #result td:before {
+        position: absolute;
+        top: 12px;
+        left: 12px;
+        width: 45%;
+        padding-right: 10px;
+        white-space: nowrap;
+        text-align: left;
+        font-weight: bold;
+        color: #333;
+    }
+
+    /* Manually add the labels for each cell using CSS generated content */
+    #result td:nth-of-type(1):before { content: "City"; }
+    #result td:nth-of-type(2):before { content: "Temp (°C)"; }
+    #result td:nth-of-type(3):before { content: "Temp (°F)"; }
+    #result td:nth-of-type(4):before { content: "Humidity (%)"; }
+    
+    /* Responsive Forecast Cards (Retained) */
     .forecast-card {
-        width: calc(33% - 16px); /* 3 cards per row minus the margin on both sides */
+        width: calc(33% - 16px);
         min-width: 90px;
         margin: 5px;
     }
-    
-    /* Make text smaller on cards for small screens */
     .forecast-card h4 { font-size: 0.85rem; }
     .forecast-card .temp { font-size: 1rem; }
     .forecast-card .condition { font-size: 0.75rem; }
@@ -154,6 +193,6 @@ footer {
 @media (max-width: 400px) {
     /* Adjust card layout for very small phones, making them stack 2-across */
     .forecast-card {
-        width: calc(50% - 16px); /* 2 cards per row */
+        width: calc(50% - 16px);
     }
 }
